@@ -1,0 +1,20 @@
+.productlist-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px;
+}
+:host ::ng-deep {
+    .product-card {
+        width: 300px;
+        p-card-title {
+            font-size: 1.1rem;
+        }
+    }
+    img {
+        width: 300px;
+        height: 150px;
+
+    }
+}

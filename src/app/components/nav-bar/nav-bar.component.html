@@ -1,0 +1,17 @@
+<p-toolbar styleClass="bg-gray-900 shadow-2" [style]="{
+    'background-image':
+      'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))'
+  }">
+    <div class="p-toolbar-group-start">
+        <h2>Ng Online Shop</h2>
+    </div>
+    <div></div>
+    <div class="p-toolbar-group-center">
+        <p-button (onClick)="op.toggle($event)" label="Show Cart" />
+    </div>
+    
+</p-toolbar>
+
+<p-overlayPanel #op>
+    <app-cart></app-cart>
+</p-overlayPanel>

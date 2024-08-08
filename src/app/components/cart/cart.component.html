@@ -1,0 +1,10 @@
+<div class="cart-container">
+  @for (product of productsToCart; track product.id) {
+    <div class="product">
+        <div class="cart-title">{{ product.title }}</div>
+        <div class="cart-price">{{ product.price }}</div>
+        <p-button (onClick)="removeProduct(product)" label="Remove" severity="danger" />
+    </div>
+  }
+  <app-total></app-total>
+</div>
