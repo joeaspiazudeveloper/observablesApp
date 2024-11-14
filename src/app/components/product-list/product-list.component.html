@@ -1,19 +1,21 @@
-<div class="productlist-container">
-    @for (product of productList; track $index) {
-        <p-card header="{{ product.title.substring(0, 15) + '...' }}" subheader="{{ product.category }}" 
-            styleClass="product-card">
-            <ng-template pTemplate="header">
-                <img alt="Card" [src]="product.thumbnail" />
-            </ng-template>
-            <p>
-                {{ product.description.substring(0, 80) + '...' }}
-            </p>
-            <ng-template pTemplate="footer">
-                <div class="flex gap-3 mt-1">
-                    <p-button (onClick)="addCart(product)" 
-                        label="Add To Cart" class="w-full" styleClass="w-full" />
-                </div>
-            </ng-template>
-        </p-card>
-    }
-</div>
+@if (productList(); as productList) {
+    <div class="productlist-container">
+        @for (product of productList.products; track $index) {
+            <p-card header="{{ product.title.substring(0, 15) + '...' }}" subheader="{{ product.category }}" 
+                styleClass="product-card">
+                <ng-template pTemplate="header">
+                    <img alt="Card" [src]="product.thumbnail" />
+                </ng-template>
+                <p>
+                    {{ product.description.substring(0, 80) + '...' }}
+                </p>
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-3 mt-1">
+                        <p-button (onClick)="addCart(product)" 
+                            label="Add To Cart" class="w-full" styleClass="w-full" />
+                    </div>
+                </ng-template>
+            </p-card>
+        }
+    </div>
+}

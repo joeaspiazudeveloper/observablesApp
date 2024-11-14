@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 
 import { ProductService } from '../../services/product.service';
-import { Product } from '../../inferfaces/product';
+import { ApiCall, Product } from '../../inferfaces/product';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -18,13 +18,16 @@ export class ProductListComponent {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
 
-  productList: Product[] = [];
+  productList = signal<ApiCall | null>(null);
 
-  ngOnInit() {
-    this.productService.getAllProducts().subscribe(res => {
-      this.productList = res.products;
-      console.log(res);
-    })
+
+  constructor() {
+    effect((cleanUp) => {
+      const subscription = this.productService.getAllProducts()
+        .subscribe((p) => this.productList.set(p))
+
+      cleanUp(() => subscription.unsubscribe());
+    });
   }
 
   addCart(product: Product) {
